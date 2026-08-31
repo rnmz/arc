@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+// TODO
+
 type FilePrivateError struct {
 	FileName string
 	Time     *time.Time
@@ -66,4 +68,13 @@ type AccountEmailNotValidError struct {
 
 func (err AccountEmailNotValidError) Error() string {
 	return fmt.Sprintf("%s", err.Email)
+}
+
+type TxxError struct {
+	TxFunctionName string
+	Time           time.Time
+}
+
+func (err TxxError) Error() string {
+	return fmt.Sprintf("%s", err.TxFunctionName)
 }

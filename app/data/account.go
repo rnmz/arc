@@ -1,6 +1,28 @@
 package data
 
-func CreateNewAccount(name, email, password, publicKey string) error {
+import (
+	"arc/app/common"
+	"arc/app/crypt"
+	"context"
+	"time"
+
+	"github.com/jmoiron/sqlx"
+)
+
+func CreateNewAccount(db *sqlx.DB, ctx context.Context, name, email, password, publicKey string) error {
+	hashedPassword, hashErr := crypt.HashText(password)
+	if hashErr != nil {
+		return hashErr
+	}
+
+	tx, txErr := db.BeginTxx(ctx)
+	if txErr != nil {
+		return common.TxxError{
+			TxFunctionName: "CreateNewAccount",
+			Time:           time.Now(),
+		}
+	}
+
 	return nil
 }
 
