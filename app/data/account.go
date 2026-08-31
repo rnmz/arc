@@ -1,10 +1,8 @@
 package data
 
 import (
-	"arc/app/common"
 	"arc/app/crypt"
 	"context"
-	"time"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -15,15 +13,12 @@ func CreateNewAccount(db *sqlx.DB, ctx context.Context, name, email, password, p
 		return hashErr
 	}
 
-	tx, txErr := db.BeginTxx(ctx)
+	tx, txErr := db.BeginTxx(ctx, nil)
 	if txErr != nil {
-		return common.TxxError{
-			TxFunctionName: "CreateNewAccount",
-			Time:           time.Now(),
-		}
+		return txErr
 	}
-
-	return nil
+	tx.Exec("INSERT INTO accounts (name, email, password, hashed_password, hashed_password_encrypted) VALUES ($1, $2, $3, $4)", name, email, hashedPassword, hashedPassword)
+	return tx.Commit()
 }
 
 func Login(login, password string) (string, error) {
