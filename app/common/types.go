@@ -14,3 +14,14 @@ const (
 	ViewStatusPrivate ViewStatus = 32
 	ViewStatusLinked  ViewStatus = 64
 )
+
+type AccountStatus string
+
+const (
+	AccountStatusUser  = "ROLE_USER"
+	AccountStatusModer = "ROLE_MODER"
+	AccountStatusAdmin = "ROLE_ADMIN"
+
+	AccountStatusTrial  = "ROLE_TRIAL"
+	AccountStatusBanned = "ROLE_BANNED"
+)
