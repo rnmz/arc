@@ -7,6 +7,7 @@ func router(app *fiber.App) {
 
 	api.Get("/file/get", func(c *fiber.Ctx) {})
 	api.Post("/file/upload", func(c *fiber.Ctx) {})
+	api.Post("/file/move", func(c *fiber.Ctx) {})
 	api.Delete("/file/delete", func(c *fiber.Ctx) {})
 
 	api.Post("/folder/create", func(c *fiber.Ctx) {})
