@@ -1,0 +1,22 @@
+[
+  {
+    "title": "small",
+    "size": 10
+  },
+  {
+    "title": "standard",
+    "size": 100
+  },
+  {
+    "title": "plus",
+    "size": 150
+  },
+  {
+    "title": "cloud ☁️",
+    "size": 100
+  },
+  {
+    "title": "shrimp 🦐",
+    "size": 1000
+  }
+]

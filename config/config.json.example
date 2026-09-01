@@ -1,0 +1,20 @@
+{
+  "log": {
+    "level": "debug",
+    "file": "./log/"
+  },
+  "fiber": {
+    "trusted_ipv4": [],
+    "trusted_ipv6": []
+  },
+  "db": {
+    "driver": "postgresql",
+    "host": "",
+    "login": "",
+    "password": "",
+    "port": 5432,
+    "sslmode": false
+  },
+
+  "master": ""
+}

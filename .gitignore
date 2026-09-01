@@ -6,3 +6,5 @@
 /files
 /test
 .env
+/config/config.json
+/config/roles.json
