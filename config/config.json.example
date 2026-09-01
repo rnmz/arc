@@ -10,10 +10,10 @@
   "db": {
     "driver": "postgresql",
     "host": "",
+    "port": 5432,
     "login": "",
     "password": "",
-    "port": 5432,
-    "sslmode": false
+    "ssl_mode": false
   },
 
   "master": ""

@@ -5,26 +5,6 @@ import (
 	"time"
 )
 
-// TODO
-
-type FilePrivateError struct {
-	FileName string
-	Time     *time.Time
-}
-
-func (err FilePrivateError) Error() string {
-	return fmt.Sprintf("%s", err.FileName)
-}
-
-type FileNotFoundError struct {
-	FileName string
-	Time     *time.Time
-}
-
-func (err FileNotFoundError) Error() string {
-	return fmt.Sprintf("%s", err.FileName)
-}
-
 type AccountSameLoginError struct {
 	Login string
 	Time  *time.Time
@@ -68,13 +48,4 @@ type AccountEmailNotValidError struct {
 
 func (err AccountEmailNotValidError) Error() string {
 	return fmt.Sprintf("%s", err.Email)
-}
-
-type TxxError struct {
-	TxFunctionName string
-	Time           time.Time
-}
-
-func (err TxxError) Error() string {
-	return fmt.Sprintf("%s", err.TxFunctionName)
 }
