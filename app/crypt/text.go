@@ -20,7 +20,7 @@ func CheckHashText(text, hash string) bool {
 	return err == nil
 }
 
-func GenerateAccountKey() ([]byte, error) {
+func GenerateKey() ([]byte, error) {
 	raw := make([]byte, 32)
 	if _, err := rand.Read(raw); err != nil {
 		return nil, err
@@ -28,13 +28,13 @@ func GenerateAccountKey() ([]byte, error) {
 	return raw, nil
 }
 
-func HashAccountKey(masterKey, rawKey []byte) (string, error) {
+func HashKey(masterKey, rawKey []byte) (string, error) {
 	sum := peppered(masterKey, rawKey)
 	bytesHash, err := bcrypt.GenerateFromPassword(sum, bcrypt.DefaultCost)
 	return string(bytesHash), err
 }
 
-func CheckAccountKey(masterKey, rawKey []byte, hash string) bool {
+func CheckKey(masterKey, rawKey []byte, hash string) bool {
 	sum := peppered(masterKey, rawKey)
 	return bcrypt.CompareHashAndPassword([]byte(hash), sum) == nil
 }

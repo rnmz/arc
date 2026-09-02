@@ -12,7 +12,7 @@ import (
 
 type AccountData struct{}
 
-func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, name, email, login, password, publicKey string) error {
+func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, name, email, login, password, defaultPlan, publicKey string) error {
 	tx, txErr := db.BeginTxx(ctx, nil)
 	if txErr != nil {
 		return txErr
@@ -20,7 +20,7 @@ func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, name, em
 	_, _ = tx.Exec(`INSERT INTO accounts (
   		name, email, login,
 	  	password, registration_date,
-	  	last_login_date, public_key) VALUES ($1, $2, $3, $4, $5, $6, $7)`, name, email, login, password, time.Now(), time.Now(), publicKey)
+	  	status, plan, public_key) VALUES ($1, $2, $3, $4, $5, $6, $7)`, name, email, login, password, time.Now(), common.AccountStatusUser, defaultPlan, publicKey)
 	return tx.Commit()
 }
 
@@ -57,6 +57,16 @@ func (_ AccountData) ChangePlan(db *sqlx.DB, ctx context.Context, id uuid.UUID, 
 		return txErr
 	}
 	_, _ = tx.Exec(`UPDATE accounts SET plan = $1 WHERE id = $2`, newPlan, id)
+	return tx.Commit()
+}
+
+func (_ AccountData) ChangeEmail(db *sqlx.DB, ctx context.Context, id uuid.UUID, newEmail string) error {
+	tx, txErr := db.BeginTxx(ctx, nil)
+	if txErr != nil {
+		return txErr
+	}
+	_, _ = tx.Exec(`UPDATE accounts SET email = $1 WHERE id = $2`, newEmail, id)
+	return tx.Commit()
 }
 
 func (_ AccountData) GetById(db *sqlx.DB, ctx context.Context, id string) (entity.Account, error) {

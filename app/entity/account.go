@@ -14,7 +14,6 @@ type Account struct {
 	Email            string    `db:"email"`
 	PasswordHash     string    `db:"password_hash"`
 	RegistrationDate time.Time `db:"registration_date"`
-	LastLoginDate    time.Time `db:"last_login_date"`
 	TwoFactor        bool      `db:"two_factor"`
 	Status           string    `db:"status"`
 	Plan             string    `db:"plan"`
