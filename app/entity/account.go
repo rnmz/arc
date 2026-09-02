@@ -12,6 +12,7 @@ type Account struct {
 	Name             string    `db:"name"`
 	Login            string    `db:"login"`
 	Email            string    `db:"email"`
+	EmailVerified    bool      `db:"email_verified"`
 	PasswordHash     string    `db:"password_hash"`
 	RegistrationDate time.Time `db:"registration_date"`
 	TwoFactor        bool      `db:"two_factor"`

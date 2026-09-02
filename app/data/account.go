@@ -18,9 +18,9 @@ func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, defaultP
 		return txErr
 	}
 	_, _ = tx.Exec(`INSERT INTO accounts (
-  		name, email, login,
+  		name, email, email_verified, login,
 	  	password, registration_date,
-	  	status, public_key) VALUES ($1, $2, $3, $4, $5, $6, $7)`, name, email, login, password, time.Now(), common.AccountStatusUser, publicKey)
+	  	status, public_key) VALUES ($1, $2, $3, $4, $5, $6, $7)`, name, email, false, login, password, time.Now(), common.AccountStatusUser, publicKey)
 	return tx.Commit()
 }
 
