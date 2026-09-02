@@ -17,6 +17,7 @@ type Account struct {
 	LastLoginDate    time.Time `db:"last_login_date"`
 	TwoFactor        bool      `db:"two_factor"`
 	Status           string    `db:"status"`
+	Plan             string    `db:"plan"`
 	PublicKey        string    `db:"public_key"`
 }
 

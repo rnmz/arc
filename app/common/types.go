@@ -14,3 +14,11 @@ const (
 	ViewStatusPrivate ViewStatus = 32
 	ViewStatusLinked  ViewStatus = 64
 )
+
+type AccountStatus int64
+
+const (
+	AccountStatusUser   AccountStatus = 1
+	AccountStatusBanned AccountStatus = 32
+	AccountStatusAdmin  AccountStatus = 64
+)

@@ -13,7 +13,7 @@ type Role struct {
 }
 
 func LoadRoles() ([]Role, error) {
-	file := path.Join(".", "config", "roles.json")
+	file := path.Join(".", "config", "plans.json")
 	data, err := os.ReadFile(file)
 	if err != nil {
 		return nil, err

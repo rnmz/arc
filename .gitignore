@@ -7,4 +7,5 @@
 /test
 .env
 /config/config.json
-/config/roles.json
+/config/plans.json
+.vscode
