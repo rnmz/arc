@@ -9,8 +9,13 @@ import (
 
 type PlanData struct{}
 
-func (_ PlanData) CreateNewPlan(db *sqlx.DB, ctx context.Context, name string) {
-
+func (_ PlanData) CreateNewPlan(db *sqlx.DB, ctx context.Context, title string, size int) error {
+	tx, txErr := db.BeginTxx(ctx, nil)
+	if txErr != nil {
+		return txErr
+	}
+	_, _ = tx.Exec(`INSERT INTO plans (title, size) VALUES ($1, $2)`, title, size)
+	return tx.Commit()
 }
 
 func (_ PlanData) GetPlan(db *sqlx.DB, ctx context.Context, id int) (entity.PlanEntity, error) {
@@ -25,10 +30,20 @@ func (_ PlanData) GetAllPlans(db *sqlx.DB, ctx context.Context) ([]entity.PlanEn
 	return plans, err
 }
 
-func (_ PlanData) EditPlan(db *sqlx.DB, ctx context.Context, id int, name string, size int) {
-
+func (_ PlanData) EditPlan(db *sqlx.DB, ctx context.Context, id int, title string, size int) error {
+	tx, txErr := db.BeginTxx(ctx, nil)
+	if txErr != nil {
+		return txErr
+	}
+	_, _ = tx.Exec(`UPDATE plans SET title = $1 and size = $2 WHERE id = $3`, title, size, id)
+	return tx.Commit()
 }
 
-func (_ PlanData) RemovePlan(db *sqlx.DB, ctx context.Context, id int) {
-
+func (_ PlanData) DeletePlan(db *sqlx.DB, ctx context.Context, id int) error {
+	tx, txErr := db.BeginTxx(ctx, nil)
+	if txErr != nil {
+		return txErr
+	}
+	_, _ = tx.Exec(`DELETE FROM plans WHERE id = $1`, id)
+	return tx.Commit()
 }

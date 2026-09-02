@@ -11,7 +11,7 @@ import (
 
 type FolderData struct{}
 
-func (_ FolderData) newFolder(db *sqlx.DB, ctx context.Context, name string, path string, ownerId uuid.UUID, viewStatus common.ViewStatus) error {
+func (_ FolderData) NewFolder(db *sqlx.DB, ctx context.Context, name string, path string, ownerId uuid.UUID, viewStatus common.ViewStatus) error {
 	tx, txErr := db.BeginTxx(ctx, nil)
 	if txErr != nil {
 		return txErr
@@ -20,20 +20,17 @@ func (_ FolderData) newFolder(db *sqlx.DB, ctx context.Context, name string, pat
 	return tx.Commit()
 }
 
-func (_ FolderData) getFolder(db *sqlx.DB, ctx context.Context, fileId uuid.UUID) (entity.FolderEntity, error) {
+func (_ FolderData) GetFolder(db *sqlx.DB, ctx context.Context, fileId uuid.UUID) (entity.FolderEntity, error) {
 	var folder entity.FolderEntity
 	err := db.GetContext(ctx, &folder, `SELECT * FROM folders WHERE id = $1`, fileId)
 	return folder, err
 }
 
-func (_ FolderData) deleteFolder(db *sqlx.DB, ctx context.Context, fileId uuid.UUID) error {
+func (_ FolderData) DeleteFolder(db *sqlx.DB, ctx context.Context, fileId uuid.UUID) error {
 	tx, txErr := db.BeginTxx(ctx, nil)
 	if txErr != nil {
 		return txErr
 	}
-	_, resErr := tx.Exec(`DELETE FROM folders WHERE id = $1`, fileId)
-	if resErr != nil {
-		return resErr
-	}
+	_, _ = tx.Exec(`DELETE FROM folders WHERE id = $1`, fileId)
 	return tx.Commit()
 }

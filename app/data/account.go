@@ -12,7 +12,7 @@ import (
 
 type AccountData struct{}
 
-func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, name, email, login, password, defaultPlan, publicKey string) error {
+func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, defaultPlanId int, name, email, login, password, publicKey string) error {
 	tx, txErr := db.BeginTxx(ctx, nil)
 	if txErr != nil {
 		return txErr
@@ -20,26 +20,20 @@ func (_ AccountData) CreateNewAccount(db *sqlx.DB, ctx context.Context, name, em
 	_, _ = tx.Exec(`INSERT INTO accounts (
   		name, email, login,
 	  	password, registration_date,
-	  	status, plan, public_key) VALUES ($1, $2, $3, $4, $5, $6, $7)`, name, email, login, password, time.Now(), common.AccountStatusUser, defaultPlan, publicKey)
+	  	status, public_key) VALUES ($1, $2, $3, $4, $5, $6, $7)`, name, email, login, password, time.Now(), common.AccountStatusUser, publicKey)
 	return tx.Commit()
 }
 
 func (_ AccountData) Login(db *sqlx.DB, ctx context.Context, login, password string) (entity.Account, error) {
 	var userData entity.Account
 	resErr := db.SelectContext(ctx, &userData, `SELECT 1 FROM accounts WHERE login = $1 and password = $2`, login, password)
-	if resErr != nil {
-		return entity.Account{}, resErr
-	}
-	return userData, nil
+	return userData, resErr
 }
 
 func (_ AccountData) AccountRecovery(db *sqlx.DB, ctx context.Context, email, login, publicKey string) (entity.Account, error) {
 	var userData entity.Account
 	resErr := db.SelectContext(ctx, &userData, `SELECT 1 FROM accounts WHERE email = $1 and login = $2 and public_key = $3`, email, login, publicKey)
-	if resErr != nil {
-		return entity.Account{}, resErr
-	}
-	return userData, nil
+	return userData, resErr
 }
 
 func (_ AccountData) ChangeStatus(db *sqlx.DB, ctx context.Context, id uuid.UUID, status common.AccountStatus) error {

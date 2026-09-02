@@ -29,7 +29,7 @@ func (_ FileData) addFile(db *sqlx.DB, ctx context.Context,
 
 func (_ FileData) getFile(db *sqlx.DB, ctx context.Context, id uuid.UUID) (entity.FileEntity, error) {
 	var file entity.FileEntity
-	err := db.GetContext(ctx, &file, `SELECT * FROM files WHERE id = $1`, id)
+	err := db.GetContext(ctx, &file, `SELECT 1 FROM files WHERE id = $1`, id)
 	return file, err
 }
 
