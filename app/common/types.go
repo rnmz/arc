@@ -15,10 +15,17 @@ const (
 	ViewStatusLinked  ViewStatus = 64
 )
 
-type AccountStatus int64
+type AccountStatus string
 
 const (
-	AccountStatusUser   AccountStatus = 1
-	AccountStatusBanned AccountStatus = 32
-	AccountStatusAdmin  AccountStatus = 64
+	AccountStatusActive  AccountStatus = "active"
+	AccountStatusBanned  AccountStatus = "banned"
+	AccountStatusDeleted AccountStatus = "deleted"
+)
+
+type AccountRole string
+
+const (
+	AccountRoleUser  AccountRole = "user"
+	AccountRoleAdmin AccountRole = "admin"
 )

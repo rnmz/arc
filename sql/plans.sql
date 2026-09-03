@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS plans (
+    id    INT  NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    size  BIGINT NOT NULL CHECK (size >= 0)
+);

@@ -12,18 +12,18 @@ import (
 type FileData struct{}
 
 func (_ FileData) addFile(db *sqlx.DB, ctx context.Context,
-	name string, size int,
-	path string, encrypt bool,
+	name string, extension string,
+	size int, path string, encrypt bool,
 	ownerId uuid.UUID, viewStatus common.ViewStatus,
 	folderId uuid.UUID) error {
 	tx, txErr := db.BeginTxx(ctx, nil)
 	if txErr != nil {
 		return txErr
 	}
-	_, _ = tx.Exec(`INSERT INTO files (name, size, path,
-   		encrypt, owner_id, view_status,
-	   	folder_id) VALUES ($1, $2, $3, $4, $5, $6, $7);`,
-		name, size, path, encrypt, ownerId, viewStatus, folderId)
+	_, _ = tx.Exec(`INSERT INTO files (name, extension,
+	   	size, path, encrypt, owner_id, view_status, folder_id)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+		name, extension, size, path, encrypt, ownerId, viewStatus, folderId)
 	return tx.Commit()
 }
 
