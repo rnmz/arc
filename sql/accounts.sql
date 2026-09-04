@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS accounts (
         CHECK (role IN ('user', 'admin')),
     status            text        NOT NULL DEFAULT 'active'
         CHECK (status IN ('active', 'banned', 'deleted')),
-    plan_id           INT         NOT NULL REFERENCES plans(id),
+    plan_id           INT         NOT NULL DEFAULT 1 REFERENCES plans(id),
     public_key        text        NOT NULL
 );
 

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS files (
     path        TEXT    NOT NULL,
     encrypt     BOOL    NOT NULL DEFAULT false,
     owner_id    UUID    NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
-    view_status INT     NOT NULL DEFAULT 32,
+    view_status TEXT    NOT NULL,
     folder_id   UUID    NOT NULL REFERENCES folders(id) ON DELETE CASCADE
 );
 

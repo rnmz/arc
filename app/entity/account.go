@@ -8,7 +8,7 @@ import (
 
 type Account struct {
 	Id               uuid.UUID `db:"id"`
-	Pfp              string    `db:"pfp"`
+	PfpFile          string    `db:"pfp_file"`
 	Name             string    `db:"name"`
 	Login            string    `db:"login"`
 	Email            string    `db:"email"`
@@ -16,12 +16,8 @@ type Account struct {
 	PasswordHash     string    `db:"password_hash"`
 	RegistrationDate time.Time `db:"registration_date"`
 	TwoFactor        bool      `db:"two_factor"`
+	Role             string    `db:"role"`
 	Status           string    `db:"status"`
-	PlanId           string    `db:"plan_id"`
+	PlanId           int       `db:"plan_id"`
 	PublicKey        string    `db:"public_key"`
-}
-
-type Pfp struct {
-	Id   int64  `db:"id"`
-	Path string `db:"path"`
 }
