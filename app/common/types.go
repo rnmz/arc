@@ -1,18 +1,18 @@
 package common
 
-type SignatureStatus int64
+type SignatureStatus bool
 
 const (
-	SignatureStatusVerified    SignatureStatus = 1
-	SignatureStatusNotVerified SignatureStatus = 32
+	SignatureStatusVerified    SignatureStatus = true
+	SignatureStatusNotVerified SignatureStatus = false
 )
 
-type ViewStatus int64
+type ViewStatus string
 
 const (
-	ViewStatusPublic  ViewStatus = 1
-	ViewStatusPrivate ViewStatus = 32
-	ViewStatusLinked  ViewStatus = 64
+	ViewStatusPublic  ViewStatus = "PUBLIC"
+	ViewStatusPrivate ViewStatus = "PRIVATE"
+	ViewStatusLink    ViewStatus = "PUBLIC_LINK"
 )
 
 type AccountStatus string

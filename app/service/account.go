@@ -1,8 +1,8 @@
 package service
 
 import (
-	"arc/app/crypt"
 	"arc/app/data"
+	"arc/app/dto"
 	"context"
 
 	"github.com/jmoiron/sqlx"
@@ -10,34 +10,29 @@ import (
 
 var accountData = data.AccountData{}
 
-func Create(db *sqlx.DB, ctx context.Context, planId int, name, email, login, password string) error {
-	hashedPass, hashErr := crypt.HashText(password)
-	if hashErr != nil {
-		return hashErr
-	}
-	accountData.CreateNewAccount(db, ctx, planId, name, email, login, hashedPass)
+func Create(db *sqlx.DB, ctx context.Context) error {
 }
 
-func Login() {
+func Login() (string, error) {
 
 }
 
-func Logout() {
+func Logout() error {
+	return nil
+}
+
+func Recover() (string, error) {
 
 }
 
-func Recover() {
+func ChangeUserRole() (dto.AccountDTO, error) {
 
 }
 
-func ChangeUserRole() {
+func GetAccountInfoById() (dto.AccountDTO, error) {
 
 }
 
-func GetAccountInfoById() {
-
-}
-
-func GetAllAccounts() {
+func GetAllAccounts() ([]dto.AccountDTO, error) {
 
 }

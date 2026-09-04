@@ -8,10 +8,11 @@ import (
 )
 
 type Config struct {
-	LogConfig   Log    `json:"log"`
-	FiberConfig Fiber  `json:"fiber"`
-	DbConfig    DB     `json:"db"`
-	MasterKey   string `json:"master"`
+	LogConfig    Log    `json:"log"`
+	FiberConfig  Fiber  `json:"fiber"`
+	DbConfig     DB     `json:"db"`
+	ValkeyConfig Valkey `json:"valkey"`
+	MasterKey    string `json:"master"`
 }
 
 type Log struct {
@@ -31,6 +32,12 @@ type DB struct {
 	Login    string `json:"login"`
 	Password string `json:"password"`
 	SSLMode  bool   `json:"ssl_mode"`
+}
+
+type Valkey struct {
+	Host     string `json:"host"`
+	Port     int    `json:"port"`
+	Password string `json:"password"`
 }
 
 func LoadConfig() (Config, error) {

@@ -1,7 +1,6 @@
 package config
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
@@ -30,10 +29,11 @@ func DBConnection(cfgDB DB) (*sqlx.DB, error) {
 }
 
 func initTables(db *sqlx.DB) error {
-	tx, txErr := db.BeginTxx(context.Background(), nil)
+	tx, txErr := db.Begin()
 	if txErr != nil {
 		return txErr
 	}
+	tx.Exec()
 
 	return nil
 }
