@@ -84,3 +84,11 @@ type AccountInvalidUsernameError struct {
 func (err AccountInvalidUsernameError) Error() string {
 	return fmt.Sprintf("%s", err.Time)
 }
+
+type AccountNotCreatedError struct {
+	Time time.Time
+}
+
+func (err AccountNotCreatedError) Error() string {
+	return fmt.Sprintf("%s", err.Time)
+}
