@@ -7,7 +7,7 @@ import (
 
 type AccountSameLoginError struct {
 	Login string
-	Time  *time.Time
+	Time  time.Time
 }
 
 func (err AccountSameLoginError) Error() string {
@@ -16,7 +16,7 @@ func (err AccountSameLoginError) Error() string {
 
 type AccountPasswordTooShortError struct {
 	Length int
-	Time   *time.Time
+	Time   time.Time
 }
 
 func (err AccountPasswordTooShortError) Error() string {
@@ -25,7 +25,7 @@ func (err AccountPasswordTooShortError) Error() string {
 
 type AccountPasswordTooWeakError struct {
 	Length int
-	Time   *time.Time
+	Time   time.Time
 }
 
 func (err AccountPasswordTooWeakError) Error() string {
@@ -34,18 +34,53 @@ func (err AccountPasswordTooWeakError) Error() string {
 
 type AccountEmailNotFoundError struct {
 	Email string
-	Time  *time.Time
+	Time  time.Time
 }
 
 func (err AccountEmailNotFoundError) Error() string {
 	return fmt.Sprintf("%s", err.Email)
 }
 
-type AccountEmailNotValidError struct {
+type AccountInvalidEmailError struct {
 	Email string
-	Time  *time.Time
+	Time  time.Time
 }
 
-func (err AccountEmailNotValidError) Error() string {
+func (err AccountInvalidEmailError) Error() string {
 	return fmt.Sprintf("%s", err.Email)
+}
+
+type AccountInvalidPasswordError struct {
+	Time time.Time
+}
+
+func (err AccountInvalidPasswordError) Error() string {
+	return fmt.Sprintf("%s", err.Time)
+}
+
+type AccountUsernameTooShortError struct {
+	Name string
+	Time time.Time
+}
+
+func (err AccountUsernameTooShortError) Error() string {
+	return fmt.Sprint("")
+}
+
+type AccountUsernameTooLongError struct {
+	Name string
+	Time time.Time
+}
+
+func (err AccountUsernameTooLongError) Error() string {
+	return fmt.Sprint("")
+}
+
+type AccountInvalidUsernameError struct {
+	Name string
+	Time time.Time
+}
+
+func (err AccountInvalidUsernameError) Error() string {
+	return fmt.Sprintf("%s", err.Time)
 }

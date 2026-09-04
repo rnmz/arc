@@ -1,11 +1,21 @@
 package dto
 
-type AccountDTO struct {
-	Id       string `json:"id"`
-	Name     string `json:"name"`
-	AvatarId string `json:"avatar_id"`
-	Type     string `json:"type"`
-	Status   string `json:"status"`
+import "github.com/google/uuid"
+
+type AccountInfoDTO struct {
+	Id            uuid.UUID   `json:"id"`
+	PfpFile       string      `json:"pfp_file"`
+	Name          string      `json:"name"`
+	Login         string      `json:"login"`
+	Email         string      `json:"email"`
+	EmailVerified bool        `json:"email_verified"`
+	Password      string      `json:"password"`
+	RegisterDate  string      `json:"register_date"`
+	TwoFactor     bool        `json:"two_factor"`
+	Role          string      `json:"role"`
+	Status        string      `json:"status"`
+	Plan          PlanInfoDTO `json:"plan"`
+	PublicKey     string      `json:"public_key"`
 }
 
 type AccountLoginDTO struct {

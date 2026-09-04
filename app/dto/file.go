@@ -1,21 +1,20 @@
 package dto
 
-import "time"
+import (
+	"github.com/google/uuid"
+)
 
-type FileInfoDTO struct {
-	Id          string     `json:"id"`
-	Crypt       bool       `json:"crypt"`
-	Name        string     `json:"name"`
-	Size        int64      `json:"size"` // MB
-	FolderId    string     `json:"folder_id"`
-	FolderName  string     `json:"folder_name"`
-	AccessType  string     `json:"access"`
-	AccessLink  string     `json:"access_link"`
-	AccessUsers []string   `json:"access_users"`
-	UploadDate  *time.Time `json:"upload_date"`
+type FileDTO struct {
+	ID         uuid.UUID `json:"id"`
+	Name       string    `json:"name"`
+	Extension  string    `json:"extension"`
+	Size       int       `json:"size"`
+	Encrypt    bool      `json:"encrypt"`
+	OwnerID    uuid.UUID `json:"ownerId"`
+	ViewStatus string    `json:"viewStatus"`
+	FolderID   uuid.UUID `json:"folderId"`
 }
-
 type FileListDTO struct {
-	Files []FileInfoDTO `json:"files"`
-	Page  int64         `json:"page"`
+	Files []FileDTO `json:"files"`
+	Page  int       `json:"page"`
 }

@@ -1,11 +1,22 @@
 package dto
 
+import "github.com/google/uuid"
+
 type FolderInfoDTO struct {
-	Id          string   `json:"id"`
-	Name        string   `json:"name"`
-	Size        int64    `json:"size"`
-	Crypt       string   `json:"crypt"`
-	AccessType  string   `json:"access"`
-	AccessLink  string   `json:"access_link"`
-	AccessUsers []string `json:"access_users"`
+	ID         uuid.UUID `json:"id"`
+	Name       string    `json:"name"`
+	OwnerID    uuid.UUID `json:"ownerId"`
+	ViewStatus string    `json:"viewStatus"`
+}
+
+type FolderListDTO struct {
+	Folders []FolderInfoDTO `json:"folders"`
+	Page    int             `json:"page"`
+}
+
+type FolderFilesDTO struct {
+	ID    uuid.UUID `json:"id"`
+	Name  string    `json:"name"`
+	Files []FileDTO `json:"files"`
+	Page  int       `json:"page"`
 }
